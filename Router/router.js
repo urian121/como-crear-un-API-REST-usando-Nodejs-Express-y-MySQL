@@ -17,34 +17,62 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Consulta todos los usuarios en la base de datos
+    const [rows] = await connection.execute(
+      "SELECT * FROM tbl_alumnos WHERE id = ?",
+      [id]
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al consultar tbl_alumnos" });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     // Crea un nuevo usuario en la base de datos
-    const { nombre, email } = req.body;
+    const {
+      nombre_alumno,
+      email_alumno,
+      curso_alumno,
+      sexo_alumno,
+      habla_ingles,
+    } = req.body;
     await connection.execute(
-      "INSERT INTO tbl_alumnos (nombre, email) VALUES (?, ?)",
-      [nombre, email]
+      "INSERT INTO tbl_alumnos (nombre_alumno, email_alumno, curso_alumno, sexo_alumno, habla_ingles) VALUES (?, ?, ?, ?, ?)",
+      [nombre_alumno, email_alumno, curso_alumno, sexo_alumno, habla_ingles]
     );
-    res.status(201).send("Usuario creado correctamente");
+    res.status(201).send("Alumno creado correctamente");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al crear usuario" });
+    res.status(500).json({ error: "Error al crear el alumno" });
   }
 });
 
 router.put("/:id", async (req, res) => {
   try {
-    // Actualiza un usuario existente en la base de datos
+    // id que viene en el req.params
     const { id } = req.params;
-    const { nombre, email } = req.body;
+    // Datos que vienenen el req.body
+    const {
+      nombre_alumno,
+      email_alumno,
+      curso_alumno,
+      sexo_alumno,
+      habla_ingles,
+    } = req.body;
     await connection.execute(
-      "UPDATE tbl_alumnos SET nombre = ?, email = ? WHERE id = ?",
-      [nombre, email, id]
+      "UPDATE tbl_alumnos SET nombre_alumno = ?, email_alumno = ? , curso_alumno = ?, sexo_alumno = ?, habla_ingles = ? WHERE id = ?",
+      [nombre_alumno, email_alumno, curso_alumno, sexo_alumno, habla_ingles, id]
     );
-    res.status(200).send("Usuario actualizado correctamente");
+    res.status(200).send("Alumno actualizado correctamente");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al actualizar usuario" });
+    res.status(500).json({ error: "Error al actualizar alumno" });
   }
 });
 
@@ -53,10 +81,10 @@ router.delete("/:id", async (req, res) => {
     // Elimina un usuario existente en la base de datos
     const { id } = req.params;
     await connection.execute("DELETE FROM tbl_alumnos WHERE id = ?", [id]);
-    res.status(200).send("Usuario eliminado correctamente");
+    res.status(200).send("Alumno eliminado correctamente");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al eliminar usuario" });
+    res.status(500).json({ error: "Error al eliminar alumno" });
   }
 });
 

@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // Monta el enrutador de usuarios en la ruta '/usuarios'
-app.use("/usuarios", usuariosRouter);
+app.use("/alumnos", usuariosRouter);
 
 // Define el puerto en el que escuchará el servidor
 const PORT = process.env.PORT || 3000;
