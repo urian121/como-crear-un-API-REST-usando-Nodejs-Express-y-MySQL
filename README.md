@@ -26,23 +26,6 @@
 
 #####
 
-    Cómo crear un API REST usando Node.js, Express y MySQL
-    Creando una Web API con Node.js y Express
-    Creación de una API con node.js
-    How to build a basic CRUD app with Node and React ?
-    Crear un API Rest con NodeJS y Express nunca fue tan provechoso y sencillo
-    Desarrollando una sencilla API REST con NodeJS y Express
-    API REST con NodeJS utilizando HTTP y Express
-
-    Simple Full Stack Products CRUD App using React, Node JS & MySQL
-    #npm init -y
-    #HTTP
-    #get #post #put #delet
-    #npm install express
-    #express
-    #npm install express
-    #crarunservidorconexpress
-
 ## Lista de Endpoint API
 
 #### Método GET ✅
